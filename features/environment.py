@@ -1,7 +1,4 @@
 """Before/after stuff."""
-import os
-
-from behave import use_fixture
 
 from core.core import AppConfig
 from core.logger import Logger

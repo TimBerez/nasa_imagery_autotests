@@ -1,8 +1,9 @@
 from urllib.parse import urljoin
 
-from core.logger import Logger
-from clients.api.models.imagery import ImageryRequest
 import requests
+
+from clients.api.models.imagery import ImageryRequest
+from core.logger import Logger
 
 logger = Logger()
 
@@ -18,8 +19,7 @@ class ApiEarthClient(object):
 
     def get_imagery_results(self, params: ImageryRequest):
         url = urljoin(self.api_host, self._imagery_endpoint)
-
         query = params.dict()
+        logger.info('We send req with parameters %s', query)
         response = requests.get(url, params=query)
-
         return response

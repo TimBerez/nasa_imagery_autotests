@@ -1,17 +1,17 @@
 """Logging stuff."""
-import sys
 import logging
 import logging.config
 import os
 import os.path
-from uuid import uuid4
+import sys
 from glob import glob
+from uuid import uuid4
 
 from munch import Munch
 
 
 class Logger():
-
+    _formatter = None
     _instance = None
     _message_format = '\n%(asctime)s\n%(levelname)s %(name)s: %(message)s'
     _timestamp_format = '%d.%m.%Y %H:%M:%S'
@@ -30,7 +30,7 @@ class Logger():
     def _initialize_logging(cls):
         """Initialize logging."""
 
-        logger = logging.getLogger('backend_tests')
+        logger = logging.getLogger('nasa_tests')
         cls.formatter = logging.Formatter(
             cls._message_format, cls._timestamp_format
         )
@@ -56,7 +56,7 @@ class Logger():
 
         log_path = os.path.join(cls._temp_file_path, '{}.log'.format(uuid4()))
         file_handler = logging.FileHandler(log_path)
-        file_handler.setFormatter(cls.formatter)
+        file_handler.setFormatter(cls._formatter)
         file_handler.setLevel(cls._scenario_log_level)
         logger.addHandler(file_handler)
         return Munch({'handler': file_handler, 'path': log_path})
