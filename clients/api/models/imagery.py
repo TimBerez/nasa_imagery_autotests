@@ -1,9 +1,6 @@
 """Model for imagery request response."""
 
 from pydantic import BaseModel
-from typing import List, Optional
-
-from datetime import date
 
 from core.core import AppConfig
 
@@ -17,7 +14,6 @@ class ImageryRequest(BaseModel):
     api_key: str
 
     def __init__(self, **params):
-
         data = {
             'lat': params['lat'],
             'lon': params['lon'],
@@ -34,4 +30,3 @@ class ImageryRequest(BaseModel):
 # pydantic is not support base64 normaly
 class ImageryResponse(BaseModel):
     text: bytes
-

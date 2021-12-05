@@ -26,7 +26,7 @@ Feature: Negative imagery tests
     When we send request to imagery endpoint
     Then we assert error message 'time data '11' does not match format '%Y-%m-%d'. Allowed request fields for earth/imagery method are 'lat', 'lon', 'address', 'dataset', 'date', 'cloud_score', 'dim'' in response
 
-  Scenario Outline: Incorrect lat key raise api exception
+  Scenario Outline: Incorrect lat/lon key raise api exception
     Given we set params for imagery request
       | param     | value    |
       | <subject> | 99999999 |

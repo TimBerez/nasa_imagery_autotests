@@ -1,12 +1,13 @@
 from behave import given, when, then
 from behave import use_step_matcher
 
+from assertions.api.earth.imagery_asserts import ImageryAsserts
 from assertions.api.shared_asserts import SharedAsserts
+from clients.api.default_params import get_default_imagery_request
 from clients.api.earth_client import ApiEarthClient
 from clients.api.models.imagery import ImageryRequest
-from assertions.api.earth.imagery_asserts import ImageryAsserts
 from core.logger import Logger
-from clients.api.default_params import get_default_imagery_request
+
 logger = Logger()
 
 use_step_matcher('re')
@@ -22,6 +23,7 @@ def step_impl(context, status_code):
     _sharedAsserts = SharedAsserts()
     _sharedAsserts.assert_response_code(context.api_response, int(status_code))
 
+
 @then("we assert img response (.*) to excepted pattern (.*)")
 def step_impl(context, equals, pattern):
     _ImageryAsserts = ImageryAsserts()
@@ -32,7 +34,6 @@ def step_impl(context, equals, pattern):
         _ImageryAsserts.assert_response_img(context.api_response, exc_pattern, False)
     else:
         raise Exception('Step is incorrect, please check args')
-
 
 
 @when("we send request to imagery endpoint")
