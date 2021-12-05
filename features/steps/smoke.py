@@ -12,11 +12,6 @@ logger = Logger()
 use_step_matcher('re')
 
 
-@given("we set params for imagery request")
-def step_impl(context, datatable='||'):
-    pass
-
-
 @given("we have default request params")
 def step_impl(context):
     context.request_params = get_default_imagery_request(context)
@@ -27,11 +22,17 @@ def step_impl(context, status_code):
     _sharedAsserts = SharedAsserts()
     _sharedAsserts.assert_response_code(context.api_response, int(status_code))
 
-@then("we assert img response to excepted pattern (.*)")
-def step_impl(context, pattern):
+@then("we assert img response (.*) to excepted pattern (.*)")
+def step_impl(context, equals, pattern):
     _ImageryAsserts = ImageryAsserts()
     exc_pattern = _ImageryAsserts.get_excepted_pattern(pattern)
-    _ImageryAsserts.assert_response_img(context.api_response, exc_pattern)
+    if equals == 'equals':
+        _ImageryAsserts.assert_response_img(context.api_response, exc_pattern, True)
+    elif equals == 'not equals':
+        _ImageryAsserts.assert_response_img(context.api_response, exc_pattern, False)
+    else:
+        raise Exception('Step is incorrect, please check args')
+
 
 
 @when("we send request to imagery endpoint")
