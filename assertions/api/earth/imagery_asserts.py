@@ -1,4 +1,5 @@
 import shutil
+
 import requests
 
 from assertions.api.shared_asserts import SharedAsserts

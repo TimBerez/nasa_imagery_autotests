@@ -1,7 +1,7 @@
 import json
-import shutil
 
 import requests
+
 from core.logger import Logger
 
 logger = Logger()

@@ -1,8 +1,3 @@
-from urllib.parse import urljoin
-
-import requests
-
-from clients.api.models.imagery import ImageryRequest
 from core.logger import Logger
 
 logger = Logger()
