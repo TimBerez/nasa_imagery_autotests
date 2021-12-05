@@ -1,6 +1,8 @@
 # nasa_imagery_autotests
 Autotests for nasa /planetary/earth/imagery api endpoint
 
+You have config file by dir '/core/config.yaml' use your api_key to requests
+
 First before start install pip -r requirements.txt
 
 
