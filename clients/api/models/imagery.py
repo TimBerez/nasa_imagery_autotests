@@ -26,6 +26,8 @@ class ImageryRequest(BaseModel):
             'cloud_score': params['cloud_score'],
             'api_key': AppConfig().api_key
         }
+        if params['api_key']:
+            data['api_key'] = params['api_key']
         super().__init__(**data)
 
 

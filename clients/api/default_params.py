@@ -14,5 +14,5 @@ def get_default_imagery_request(context):
               'dim': 0.1,
               'date': '2021-11-13',
               'cloud_score': False,
-              'api_key': context.app_config.api_host}
+              'api_key': context.app_config.api_key}
     return params
