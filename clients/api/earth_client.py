@@ -21,5 +21,5 @@ class ApiEarthClient(object):
         url = urljoin(self.api_host, self._imagery_endpoint)
         query = params.dict()
         logger.info('We send req with parameters %s', query)
-        response = requests.get(url, params=query)
+        response = requests.get(url, params=query, stream=True)
         return response

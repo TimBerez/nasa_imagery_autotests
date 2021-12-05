@@ -4,7 +4,7 @@ from behave import use_step_matcher
 from assertions.api.shared_asserts import SharedAsserts
 from clients.api.earth_client import ApiEarthClient
 from clients.api.models.imagery import ImageryRequest
-from assertions.api.earth import imagery_asserts
+from assertions.api.earth.imagery_asserts import ImageryAsserts
 from core.logger import Logger
 from clients.api.default_params import get_default_imagery_request
 logger = Logger()
@@ -26,6 +26,12 @@ def step_impl(context):
 def step_impl(context, status_code):
     _sharedAsserts = SharedAsserts()
     _sharedAsserts.assert_response_code(context.api_response, int(status_code))
+
+@then("we assert img response to excepted pattern (.*)")
+def step_impl(context, pattern):
+    _ImageryAsserts = ImageryAsserts()
+    exc_pattern = _ImageryAsserts.get_excepted_pattern(pattern)
+    _ImageryAsserts.assert_response_img(context.api_response, exc_pattern)
 
 
 @when("we send request to imagery endpoint")

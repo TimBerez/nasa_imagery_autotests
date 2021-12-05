@@ -7,3 +7,9 @@ Feature: Smoke imagery tests
     Given we have default request params
     When we send request to imagery endpoint
     Then we get 200 response status code
+
+  @run
+  Scenario: Assert basic response with default params
+    Given we have default request params
+    When we send request to imagery endpoint
+    Then we assert img response to excepted pattern krasnodar_pattern_1
